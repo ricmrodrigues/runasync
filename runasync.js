@@ -17,7 +17,7 @@ var RunAsync = (function() {
         url = window.URL || window.webkitURL;
     
     if (!BlobBuilder && !Blob) {
-        throw "This browser does not support DoAsync";
+        throw "This browser does not support RunAsync";
     }
 
     return function(task, params) {
