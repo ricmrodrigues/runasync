@@ -3,6 +3,7 @@ Usage:
 ```javascript
 RunAsync(function([parameters]) { } [, parameters]);
 ```
+returns: jQuery.Deferred
 
 ```javascript
 for (var x=1;x<=3;x++) {
