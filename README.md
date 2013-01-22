@@ -1,5 +1,7 @@
 Usage:
 
+RunAsync(function([parameters]) { } [, parameters]);
+
 ```javascript
 for (var x=1;x<=3;x++) {
 	(function(idx) {
