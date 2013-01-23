@@ -11,7 +11,7 @@
  *
  */
 var Task = (function() {
-	"use strict";
+    "use strict";
 	var BlobBuilder = BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder ||
                      window.MozBlobBuilder || window.MSBlobBuilder,
         url = window.URL || window.webkitURL;
