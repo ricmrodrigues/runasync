@@ -2,7 +2,7 @@
   "name": "runasync",
   "title": "RunAsync",
   "description": "C# mini TPL in JavaScript using Web Workers",
-  "version": "0.2",
+  "version": "0.2.0",
   "homepage": "https://github.com/ricmrodrigues/runasync",
   "author": {
     "name": "Ricardo Rodrigues",
