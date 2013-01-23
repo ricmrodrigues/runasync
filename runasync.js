@@ -27,22 +27,23 @@ var Task = (function() {
     		_complete = false,
     		_resolvedData = null;
     	
+    	var resolve = function (data) {    	
+    		_complete = true;
+    		_resolvedData = data || _resolvedData;    		
+    		if (_callback) {    			    			
+    			_callback.apply(null, [_resolvedData]);
+    		}
+    	};    	
+    	
     	this.continueWith = function(callback) {
     		if (!callback || typeof(callback) !== typeof(Function)) {
     			throw "callback must be a function"
     		}
     		_callback = callback;
     		if (_complete) {
-    			self.resolve();
+    			resolve();
     		}
     	};
-    	this.resolve = function(data) {    	
-    		_complete = true;
-    		_resolvedData = data || _resolvedData;    		
-    		if (_callback) {    			    			
-    			_callback.apply(null, [_resolvedData]);
-    		}
-    	}
     }
 
     return {
