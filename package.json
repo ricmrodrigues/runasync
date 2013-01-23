@@ -1,0 +1,36 @@
+{
+  "name": "runasync",
+  "title": "RunAsync",
+  "description": "C# mini TPL in JavaScript using Web Workers",
+  "version": "0.2",
+  "homepage": "https://github.com/ricmrodrigues/runasync",
+  "author": {
+    "name": "Ricardo Rodrigues",
+    "email": "ricmrodrigues@gmail.com",
+    "url": "https://github.com/ricmrodrigues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ricmrodrigues/runasync.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ricmrodrigues/runasync/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://mit-license.org/"
+    }
+  ],
+  "main": "build/runasync",
+  "engines": {
+    "node": ">=0.6"
+  },
+  "scripts": {
+    "test": "grunt travis --verbose"
+  }
+  "devDependencies": {
+    "grunt": "~0.3.14"
+  },
+  "keywords": []
+}
