@@ -19,11 +19,36 @@ var Task = (function() {
     if (!BlobBuilder && !Blob) {
         throw "This browser does not support Task.Run";
     }
+    
+    //TODO: move to different file
+    function Promise() {
+    	var self = this,
+    		_callback = null,
+    		_complete = false,
+    		_resolvedData = null;
+    	
+    	this.continueWith = function(callback) {
+    		if (!callback || typeof(callback) !== typeof(Function)) {
+    			throw "callback must be a function"
+    		}
+    		_callback = callback;
+    		if (_complete) {
+    			self.resolve();
+    		}
+    	};
+    	this.resolve = function(data) {    	
+    		_complete = true;
+    		_resolvedData = data || _resolvedData;    		
+    		if (_callback) {    			    			
+    			_callback.apply(null, [_resolvedData]);
+    		}
+    	}
+    }
 
     return {
-    	Run: function(task, params) {
+    	run: function(task, params) {
 			var blob = null,
-			    promise = $.Deferred(),
+			    promise = new Promise(),
 			    func = "onmessage = function(e) { var taskResult = ("+task.toString()+")(e.data); postMessage(taskResult); }";     
 			
 			if (Blob) {
