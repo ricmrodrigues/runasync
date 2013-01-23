@@ -42,6 +42,8 @@ var Task = (function() {
     		if (_complete) {
     			self._resolve();
     		}
+    		
+    		return this;
     	};
     }
 
