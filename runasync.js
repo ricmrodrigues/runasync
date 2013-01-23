@@ -13,44 +13,44 @@
 var Task = (function() {
 	"use strict";
 	var BlobBuilder = BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder ||
-                     window.MozBlobBuilder || window.MSBlobBuilder,
-        url = window.URL || window.webkitURL;
+	             window.MozBlobBuilder || window.MSBlobBuilder,
+	url = window.URL || window.webkitURL;
     
-    if (!BlobBuilder && !Blob) {
-        throw "This browser does not support Task.Run";
-    }
-    
-    //TODO: move to different file
-    function Promise() {
-    	var self = this,
-    		_callback = [],
-    		_complete = false,
-    		_resolvedData = null;
-    	
-    	this._resolve = function (data) {    	
-    		_complete = true;
-    		_resolvedData = data || _resolvedData;    		
-    		if (_callback.length) { 
-    			for (var i=0; i<_callback.length; i++) {
-    				_callback[i].apply(null, [_resolvedData]);
-    			}    			
-    		}
-    	};    	    	
-    	this.continueWith = function(callback) {
-    		if (!callback || typeof(callback) !== typeof(Function)) {
-    			throw "callback must be a function"
-    		}
-    		_callback.push(callback);
-    		if (_complete) {
-    			self._resolve();
-    		}
-    		
-    		return this;
-    	};
-    }
+  if (!BlobBuilder && !Blob) {
+      throw "This browser does not support Task.Run";
+  }
+  
+  //TODO: move to different file
+  function Promise() {
+  	var self = this,
+  		_callback = [],
+  		_complete = false,
+  		_resolvedData = null;
+  	
+  	this._resolve = function (data) {    	
+  		_complete = true;
+  		_resolvedData = data || _resolvedData;    		
+  		if (_callback.length) { 
+  			for (var i=0; i<_callback.length; i++) {
+  				_callback[i].apply(null, [_resolvedData]);
+  			}    			
+  		}
+  	};    	    	
+  	this.continueWith = function(callback) {
+  		if (!callback || typeof(callback) !== typeof(Function)) {
+  			throw "callback must be a function"
+  		}
+  		_callback.push(callback);
+  		if (_complete) {
+  			self._resolve();
+  		}
+  		
+  		return this;
+  	};
+  }
 
-    return {
-    	run: function(task, params) {
+  return {
+  	run: function(task, params) {
 			var blob = null,
 			    promise = new Promise(),
 			    func = "onmessage = function(e) { var taskResult = ("+task.toString()+")(e.data); postMessage(taskResult); }";     
@@ -72,5 +72,5 @@ var Task = (function() {
 			worker.postMessage(params); // Start the worker.    
 			return promise;
 		}
-    };    	
+  };    	
 })();
