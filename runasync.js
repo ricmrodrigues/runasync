@@ -27,21 +27,20 @@ var Task = (function() {
     		_complete = false,
     		_resolvedData = null;
     	
-    	var resolve = function (data) {    	
+    	this._resolve = function (data) {    	
     		_complete = true;
     		_resolvedData = data || _resolvedData;    		
     		if (_callback) {    			    			
     			_callback.apply(null, [_resolvedData]);
     		}
-    	};    	
-    	
+    	};    	    	
     	this.continueWith = function(callback) {
     		if (!callback || typeof(callback) !== typeof(Function)) {
     			throw "callback must be a function"
     		}
     		_callback = callback;
     		if (_complete) {
-    			resolve();
+    			self._resolve();
     		}
     	};
     }
@@ -64,7 +63,7 @@ var Task = (function() {
 			var blobUrl = url.createObjectURL(blob),        
 				worker = new Worker(blobUrl);
 			worker.onmessage = function(e) {
-			    promise.resolve(e.data);
+			    promise._resolve(e.data);
 			};
 			worker.postMessage(params); // Start the worker.    
 			return promise;
