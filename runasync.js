@@ -23,22 +23,24 @@ var Task = (function() {
     //TODO: move to different file
     function Promise() {
     	var self = this,
-    		_callback = null,
+    		_callback = [],
     		_complete = false,
     		_resolvedData = null;
     	
     	this._resolve = function (data) {    	
     		_complete = true;
     		_resolvedData = data || _resolvedData;    		
-    		if (_callback) {    			    			
-    			_callback.apply(null, [_resolvedData]);
+    		if (_callback.length) { 
+    			for (var i=0; i<_callback.length; i++) {
+    				_callback[i].apply(null, [_resolvedData]);
+    			}    			
     		}
     	};    	    	
     	this.continueWith = function(callback) {
     		if (!callback || typeof(callback) !== typeof(Function)) {
     			throw "callback must be a function"
     		}
-    		_callback = callback;
+    		_callback.push(callback);
     		if (_complete) {
     			self._resolve();
     		}
