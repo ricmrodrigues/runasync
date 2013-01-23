@@ -3,7 +3,7 @@
  * http://github.com/ricmrodrigues/runasync
  *
  * Library that allows you to execute JavaScript asynchronously
- * seamlessly using modern browser capabitilies
+ * seamlessly using modern browser capabilities
  *
  * Copyright 2013 @ricmrodrigues
  * Released under the MIT license
