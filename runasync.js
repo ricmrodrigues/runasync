@@ -42,6 +42,6 @@ var Task = (function() {
 			};
 			worker.postMessage(params); // Start the worker.    
 			return promise;
-		};
+		}
     };    	
 })();
