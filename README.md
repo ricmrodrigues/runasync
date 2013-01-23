@@ -5,6 +5,11 @@ Usage:
 ```
 
 ```javascript
+Promise:
+ - continueWith(function([parameters]) { })
+```
+
+```javascript
 for (var x=1;x<=3;x++) {
 	(function(idx) {
 		Task.run(function(idx) {                
