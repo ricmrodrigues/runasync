@@ -19,7 +19,7 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://mit-license.org/"
+      "url": "https://github.com/ricmrodrigues/runasync/blob/master/license"
     }
   ],
   "main": "build/runasync",
