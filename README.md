@@ -1,12 +1,15 @@
+[![Build Status](https://travis-ci.org/ricmrodrigues/runasync.png?branch=master)](https://travis-ci.org/ricmrodrigues/runasync)
+
 Usage:
 
 ```javascript
-(Promise) Task.run(function([parameters]) { } [, Array parameters]);
+Task:
+Task.run(function([parameters]) { } [, Array parameters]) returns Promise
 ```
 
 ```javascript
 Promise:
- (Promise) continueWith(function([parameters]) { })
+continueWith(function([parameters]) { }) returns Promise
 ```
 
 ```javascript
