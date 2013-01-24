@@ -6,13 +6,13 @@ with a syntax resembling .NET's Task Parallel Library.
 Usage:
 
 ```javascript
-**Task**:
-Task.run(function([parameters]) { } [, Array parameters]) returns **Promise**
+__Task__:
+Task.run(function([parameters]) { } [, Array parameters]) returns __Promise__
 ```
 
 ```javascript
-**Promise**:
-continueWith(function([parameters]) { }) returns **Promise**
+__Promise__:
+continueWith(function([parameters]) { }) returns __Promise__
 ```
 
 ```javascript
