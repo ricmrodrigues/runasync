@@ -1,4 +1,6 @@
-test("assert returned function is a promise", function() {
+QUnit.test("assert returned function is a promise", function() {
+	expect(2);
+	
     var promise = Task.run(function() {                
             var idx = 0,
 			    response = 0,
@@ -11,8 +13,8 @@ test("assert returned function is a promise", function() {
             return response;
         });	
 	
-     ok( typeof(promise) === "function" , "Passed!" );
-	 ok( typeof(promise.continueWith) === "function" , "Passed!" );
+	 console.log(typeof(promise));
+	
+     QUnit.ok( typeof(promise) === typeof(Object.prototype) , "Passed!" );
+	 QUnit.ok( typeof(promise.continueWith) === typeof(Function) , "Passed!" );
 });
-
-QUnit.start();
