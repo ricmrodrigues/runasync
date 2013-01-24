@@ -14,3 +14,5 @@ test("assert returned function is a promise", function() {
      ok( typeof(promise) === "function" , "Passed!" );
 	 ok( typeof(promise.continueWith) === "function" , "Passed!" );
 });
+
+QUnit.start();
