@@ -1,11 +1,11 @@
 {
   "name": "runasync",
   "title": "RunAsync",
-  "description": "C# mini TPL in JavaScript using Web Workers",
+  "description": "Library that allows you to execute JavaScript asynchronously\n * seamlessly using modern browser capabilities\n",
   "version": "0.2.0",
   "homepage": "https://github.com/ricmrodrigues/runasync",
   "author": {
-    "name": "Ricardo Rodrigues",
+    "name": "@ricmrodrigues",
     "email": "ricmrodrigues@gmail.com",
     "url": "https://github.com/ricmrodrigues"
   },

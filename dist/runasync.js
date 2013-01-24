@@ -1,31 +1,21 @@
 /*
- * RunAsync v0.2
- * http://github.com/ricmrodrigues/runasync
- *
+ * RunAsync v0.2.0 - 2013-01-24
+ * 
  * Library that allows you to execute JavaScript asynchronously
  * seamlessly using modern browser capabilities
- *
- * Copyright 2013 @ricmrodrigues
- * Released under the MIT license
- * http://mit-license.org/
- *
+ * 
+ * https://github.com/ricmrodrigues/runasync
+ * Copyright (c) 2013 @ricmrodrigues
+ * Licensed MIT
  */
-var Task = (function () {
-    "use strict";
-    var BlobBuilder = BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder,
-        url = window.URL || window.webkitURL;
 
-    if (!BlobBuilder && !Blob) {
-        throw "This browser does not support Task.Run";
-    }
-
-    //TODO: move to different file
+var Promise = (function () {
     function Promise() {
         var self = this,
             _callback = [],
             _complete = false,
             _resolvedData = null;
-
+        
         this._resolve = function (data) {
             _complete = true;
             _resolvedData = data || _resolvedData;
@@ -37,15 +27,26 @@ var Task = (function () {
         };
         this.continueWith = function (callback) {
             if (!callback || typeof (callback) !== typeof (Function)) {
-                throw "callback must be a function"
+                throw "callback must be a function";
             }
             _callback.push(callback);
             if (_complete) {
                 self._resolve();
             }
-
+        
             return this;
         };
+	}
+	
+	return Promise;
+})();
+var Task = (function (Promise) {
+    "use strict";
+    var BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder,
+        url = window.URL || window.webkitURL;
+
+    if (!BlobBuilder && !Blob) {
+        throw "this browser does not support Task.Run";
     }
 
     return {
@@ -73,4 +74,4 @@ var Task = (function () {
             return promise;
         }
     };
-})();
+})(Promise);

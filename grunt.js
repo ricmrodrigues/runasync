@@ -5,11 +5,11 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: '<json:package.json>',
         meta: {
-            banner: '/*\n' + ' * <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %>\n' + '<%= pkg.homepage ? " * " + pkg.homepage + "\n" : "" %>' + ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' + ' * Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n' + ' */'
+            banner: '/*\n' + ' * <%= pkg.title || pkg.name %> v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %>\n' + ' * \n * <%= pkg.description %> * \n'  + '<%= pkg.homepage ? " * " + pkg.homepage + "\n" : "" %>' + ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' + ' * Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n' + ' */'
         },
         concat: {
             dist: {
-                src: ['<banner:meta.banner>', '<file_strip_banner:src/<%= pkg.name %>.js>'],
+                src: ['<banner:meta.banner>', 'src/promise.js', '<file_strip_banner:src/<%= pkg.name %>.js>'],
                 dest: 'dist/<%= pkg.name %>.js'
             }
         },
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
         // files: ['test/**/*.html']
         // },
         lint: {
-            files: ['grunt.js', 'src/**/*.js', 'test/**/*.js']
+            files: ['grunt.js', 'src/**/*.js']
         },
         watch: {
             files: '<config:lint.files>',
@@ -43,11 +43,10 @@ module.exports = function (grunt) {
                 boss: true,
                 eqnull: true,
                 browser: true
+            },
+            globals: {
+                Promise: true
             }
-            // },
-            // globals: {
-            // jQuery: true
-            // }
         },
         uglify: {}
     });
