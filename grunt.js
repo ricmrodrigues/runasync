@@ -19,16 +19,15 @@ module.exports = function (grunt) {
                 dest: 'dist/<%= pkg.name %>.min.js'
             }
         },
-        // qunit: {
-        // files: ['test/**/*.html']
-        // },
+        qunit: {
+            files: ['test/*.html']
+        },
         lint: {
             files: ['grunt.js', 'src/**/*.js']
         },
         watch: {
             files: '<config:lint.files>',
-            tasks: 'lint'
-            //tasks: 'lint qunit'
+            tasks: 'lint qunit'
         },
         jshint: {
             options: {
@@ -52,10 +51,8 @@ module.exports = function (grunt) {
     });
 
     // Default task.
-    //grunt.registerTask('default', 'lint qunit concat min');
     grunt.registerTask('default', 'lint concat min');
 
     // Travis CI task.
-    //grunt.registerTask('travis', 'lint qunit');
-    grunt.registerTask('travis', 'lint');
+    grunt.registerTask('travis', 'lint qunit');
 };
