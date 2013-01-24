@@ -1,3 +1,4 @@
+QUnit.config.autostart = false;
 QUnit.test("assert returned function is a promise", function() {
 	expect(2);
 	
@@ -18,3 +19,4 @@ QUnit.test("assert returned function is a promise", function() {
      QUnit.ok( typeof(promise) === typeof(Object.prototype) , "Passed!" );
 	 QUnit.ok( typeof(promise.continueWith) === typeof(Function) , "Passed!" );
 });
+QUnit.start();

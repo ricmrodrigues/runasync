@@ -42,10 +42,10 @@ var Promise = (function () {
 })();
 var Task = (function (Promise) {
     "use strict";
-    window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder,
-    window.URL = window.URL || window.webkitURL;
+    var BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder,
+        url = window.URL || window.webkitURL;
 
-    if (!window.BlobBuilder && !window.Blob) {
+    if (!BlobBuilder && !Blob) {
         throw "this browser does not support Task.Run";
     }
 
@@ -55,12 +55,12 @@ var Task = (function (Promise) {
                 promise = new Promise(),
                 func = "onmessage = function(e) { var taskResult = (" + task.toString() + ")(e.data); postMessage(taskResult); }";
 
-            if (window.Blob) {
-                blob = new window.Blob([func], {
+            if (Blob) {
+                blob = new Blob([func], {
                     type: 'text/javascript'
                 });
             } else {
-                var bb = new window.BlobBuilder();
+                var bb = new BlobBuilder();
                 bb.append(func);
                 blob = bb.getBlob("text/javascript");
             }
