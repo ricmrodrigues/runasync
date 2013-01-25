@@ -1,5 +1,5 @@
 /*
- * RunAsync v0.2.0
+ * RunAsync v0.3.0
  * http://github.com/ricmrodrigues/runasync
  *
  * Library that allows you to execute JavaScript asynchronously
@@ -23,7 +23,9 @@ var Task = (function (Promise) {
         run: function (task, params) {
             var blob = null,
                 promise = new Promise(),
-                func = "onmessage = function(e) { var taskResult = (" + task.toString() + ")(e.data); postMessage(taskResult); }";
+                dispatcher = "var dispatch = function(func) { postMessage({ done: false, result: func.toString() }); };",
+                finalizer = "postMessage({ done: true, result: taskResult}); }",
+                func = "onmessage = function(e) { " + dispatcher + " var taskResult = (" + task.toString() + ")(e.data); " + finalizer;
 
             if (Blob) {
                 blob = new Blob([func], {
@@ -38,7 +40,13 @@ var Task = (function (Promise) {
             var blobUrl = url.createObjectURL(blob),
                 worker = new Worker(blobUrl);
             worker.onmessage = function (e) {
-                promise._resolve(e.data);
+                if (e.data.done) {
+                    //worker finished, resolve promise with result
+                    promise._resolve(e.data.result);
+                } else {
+                    //worker dispatched something to the UI thread
+                    eval("(" + e.data.result + ")()");
+                }
             };
             worker.postMessage(params); // Start the worker.    
             return promise;
