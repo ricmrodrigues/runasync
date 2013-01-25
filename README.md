@@ -18,8 +18,8 @@ dispatch(function() {})
 
 __Promise__:
 ```javascript
-//'then' executes in the UI thread, immediately after then background thread finishes
-then(function([parameters]) { }) return Promise
+//'wh' execnutes in the UI thread, immediately after the background thread finishes
+when(function([parameters]) { }) return Promise
 //'continueWith' spins up a new task with the callback provided
 continueWith(function([parameters]) { }) returns Promise
 ```
@@ -42,7 +42,7 @@ for (var x=1;x<=3;x++) {
 			return response;
 		}, [idx]);
 		
-		task.then(function(value) {
+		task.when(function(value) {
 		    console.log("executed from UI thread");
 		});
 		
@@ -53,4 +53,4 @@ for (var x=1;x<=3;x++) {
 }
 ```
 
-http://jsfiddle.net/v7m5p/9/
+http://jsfiddle.net/v7m5p/11/
