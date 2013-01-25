@@ -32,7 +32,7 @@ http://jsfiddle.net/v7m5p/12/
 __Running code synchronously__:
 http://jsfiddle.net/UejYX/3/
 
-Example:
+__Example__:
 ```javascript
 for (var x=1;x<=3;x++) {
 	(function(idx) {
