@@ -25,7 +25,7 @@ var Task = (function (Promise) {
                 promise = new Promise(),
                 dispatcher = "var dispatch = function(func) { postMessage({ done: false, result: func.toString() }); };",
                 finalizer = "postMessage({ done: true, result: taskResult}); }",
-                func = "onmessage = function(e) { " + dispatcher + " var taskResult = (" + task.toString() + ")(e.data); " + finalizer;
+                func = "onmessage = function(e) { " + dispatcher + " var taskResult = (" + task.toString() + ").apply(null, e.data); " + finalizer;
 
             if (Blob) {
                 blob = new Blob([func], {
