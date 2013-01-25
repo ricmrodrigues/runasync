@@ -11,20 +11,23 @@ __Task__:
 Task.run(function([parameters]) { } [, Array parameters]) returns Promise
 ```
 
-__Dispatch execution to the UI thread (from within a Task.run function)__:
+__Dispatch execution to the UI thread (from within a Task.run or continueWith function callback)__:
 ```javascript
 dispatch(function() {})
 ```
 
 __Promise__:
 ```javascript
+//'then' executes in the UI thread, immediately after then background thread finishes
+then(function([parameters]) { }) return Promise
+//'continueWith' spins up a new task with the callback provided
 continueWith(function([parameters]) { }) returns Promise
 ```
 
 ```javascript
 for (var x=1;x<=3;x++) {
 	(function(idx) {
-		Task.run(function(idx) {                
+		var task = Task.run(function(idx) {                
 		    var response = 0,
 		        max = (89000000*(idx*3));
 		    
@@ -37,12 +40,14 @@ for (var x=1;x<=3;x++) {
 		        if (i === max - 1) response = i;        
 		    }
 			return response;
-		}, [idx]).continueWith(function(value) {
-		    console.log("my async code #"+idx+" completed!!");
-		    console.log("output: " + value);
-		}).continueWith(function(value) {
-		    console.log("my async code #"+idx+" completed 2!!");
-		    console.log("output 2: " + value);
+		}, [idx]);
+		
+		task.then(function(value) {
+		    console.log("executed from UI thread");
+		});
+		
+		task.continueWith(function(value) {
+		    //execute something else asynchronously
 		});		
 	})(x);
 }
