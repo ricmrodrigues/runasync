@@ -18,7 +18,7 @@ dispatch(function() {})
 
 __Promise__:
 ```javascript
-//'wh' execnutes in the UI thread, immediately after the background thread finishes
+//'when' executes in the UI thread, immediately after the background thread finishes
 when(function([parameters]) { }) return Promise
 //'continueWith' spins up a new task with the callback provided
 continueWith(function([parameters]) { }) returns Promise
