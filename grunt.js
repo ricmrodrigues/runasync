@@ -41,17 +41,19 @@ module.exports = function (grunt) {
                 undef: true,
                 boss: true,
                 eqnull: true,
-                browser: true
+                browser: true,
+				evil: true
             },
             globals: {
-                Promise: true
+                Promise: true,
+				Task: true
             }
         },
         uglify: {}
     });
 
     // Default task.
-    grunt.registerTask('default', 'lint qunit concat min');
+    grunt.registerTask('default', 'lint concat min');
 
     // Travis CI task.
     grunt.registerTask('travis', 'lint'); //removed qunit

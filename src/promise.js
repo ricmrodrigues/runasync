@@ -43,7 +43,7 @@ var Promise = (function () {
             }
 
             return this;
-        }
+        };
         this.continueWith = function (continuation) {
             if (!continuation || typeof (continuation) !== typeof (Function)) {
                 throw "continuation must be a function";
@@ -55,7 +55,7 @@ var Promise = (function () {
                 Task.run(continuation).then(function (val) {
                     promise._resolve(val);
                 });
-            }
+            };
 
             return promise;
         };
