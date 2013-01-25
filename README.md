@@ -11,6 +11,11 @@ __Task__:
 Task.run(function([parameters]) { } [, Array parameters]) returns Promise
 ```
 
+__Dispatch execution to the UI thread (from within a Task.run function):
+```javascript
+dispatch(function() {})
+```
+
 __Promise__:
 ```javascript
 continueWith(function([parameters]) { }) returns Promise
@@ -43,4 +48,4 @@ for (var x=1;x<=3;x++) {
 }
 ```
 
-http://jsfiddle.net/v7m5p/6/
+http://jsfiddle.net/v7m5p/8/
