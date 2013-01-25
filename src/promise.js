@@ -10,7 +10,7 @@ var Promise = (function () {
             _complete = true;
             _resolvedData = data || _resolvedData;
 
-            //invoke callbacks specified in then
+            //invoke callbacks specified in when
             while (_callback.length) {
                 _callback.shift().apply(null, [_resolvedData]);
             }
@@ -23,7 +23,7 @@ var Promise = (function () {
         this.result = function () {
             return _resolvedData;
         };
-        this.then = function (callback) {
+        this.when = function (callback) {
             if (!callback || typeof (callback) !== typeof (Function)) {
                 throw "callback must be a function";
             }
@@ -41,7 +41,7 @@ var Promise = (function () {
 
             var promise = new Promise();
             _continuation = function (result) {
-                Task.run(continuation, [result]).then(function (result) {
+                Task.run(continuation, [result]).when(function (result) {
                     promise._resolve(result);
                 });
             };
