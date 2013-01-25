@@ -23,6 +23,10 @@ for (var x=1;x<=3;x++) {
 		    var response = 0,
 		        max = (89000000*(idx*3));
 		    
+	            dispatch(function() {
+	                //do some DOM manipulation that gets executed in the UI thread
+	            });		    
+		    
 		    for (var i=0;i<max;i++) {
 		        i++;
 		        if (i === max - 1) response = i;        
