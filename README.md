@@ -11,7 +11,7 @@ __Task__:
 Task.run(function([parameters]) { } [, Array parameters]) returns Promise
 ```
 
-__Dispatch__ execution to the UI thread (from within a Task.run function):
+__Dispatch execution to the UI thread (from within a Task.run function)__:
 ```javascript
 dispatch(function() {})
 ```
