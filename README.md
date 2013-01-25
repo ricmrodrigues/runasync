@@ -24,6 +24,15 @@ when(function([parameters]) { }) return Promise
 continueWith(function([parameters]) { }) returns Promise
 ```
 
+Performance:
+============
+__Using RunAsync__:
+http://jsfiddle.net/v7m5p/12/
+
+__Running code synchronously__:
+http://jsfiddle.net/UejYX/3/
+
+Example:
 ```javascript
 for (var x=1;x<=3;x++) {
 	(function(idx) {
@@ -52,5 +61,3 @@ for (var x=1;x<=3;x++) {
 	})(x);
 }
 ```
-
-http://jsfiddle.net/v7m5p/11/
