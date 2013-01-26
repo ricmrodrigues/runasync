@@ -24,13 +24,13 @@
   ],
   "main": "build/runasync",
   "engines": {
-    "node": ">=0.6"
+    "node": "latest"
   },
   "scripts": {
-    "test": "grunt travis --verbose"
+    "test": "grunt travis --verbose --force"
   },
   "devDependencies": {
-    "grunt": "~0.3.14"
+    "grunt": "latest"
   },
   "keywords": []
 }
