@@ -27,7 +27,7 @@ var Task = (function (Promise) {
                 finalizer = "postMessage({ done: true, result: taskResult}); }",
                 func = "onmessage = function(e) { " + dispatcher + " var taskResult = (" + task.toString() + ").apply(null, e.data); " + finalizer;
 
-            if (Blob) {
+            if (typeof(Blob) === typeof(Function)) {
                 blob = new Blob([func], {
                     type: 'text/javascript'
                 });

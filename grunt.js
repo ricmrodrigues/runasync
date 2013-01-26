@@ -22,6 +22,9 @@ module.exports = function (grunt) {
         qunit: {
             files: ['test/*.html']
         },
+        phantomjs: {
+            timeout: 20000
+        },		
         lint: {
             files: ['grunt.js', 'src/**/*.js']
         },
@@ -53,8 +56,8 @@ module.exports = function (grunt) {
     });
 
     // Default task.
-    grunt.registerTask('default', 'lint concat min');
+    grunt.registerTask('default', 'lint qunit concat min');
 
     // Travis CI task.
-    grunt.registerTask('travis', 'lint'); //removed qunit
+    grunt.registerTask('travis', 'lint qunit'); //removed qunit
 };
