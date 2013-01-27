@@ -13,7 +13,7 @@ Task.run(function([parameters]) { } [, Array parameters]) returns Promise
 
 __Dispatch execution to the UI thread (from within a Task.run or continueWith function callback)__:
 ```javascript
-dispatch(function() {})
+dispatch(function() {} [, Array parameters])
 ```
 
 __Promise__:
@@ -40,9 +40,12 @@ for (var x=1;x<=3;x++) {
 		    var response = 0,
 		        max = (89000000*(idx*3));
 		    
-            dispatch(function() {
+            dispatch(function(max) {
                 //do some DOM manipulation that gets executed in the UI thread
-            });		    
+				
+				//use max if we need to, this way we can send state from the background thread
+				//to the UI thread
+            }, [max]);		    
 		    
 		    for (var i=0;i<max;i++) {
 		        i++;
