@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">  
@@ -37,7 +37,7 @@
 							}, [idx]);
 							
 							//execute something after the background task, in the UI thread
-							task.then(function(value) {
+							task.when(function(value) {
 								$('#clickme').text("#"+idx+" done!");
 								console.log("my async code #"+idx+" completed!!");
 								console.log("output: " + value);
@@ -47,7 +47,7 @@
 							//with its result as argument
 							task.continueWith(function(value) {
 								return value;
-							}).then(function(value) { //ui thread
+							}).when(function(value) { //ui thread
 								console.log("result from task execution " + value);
 							});
 						})(x);

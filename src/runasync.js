@@ -22,10 +22,15 @@ var Task = (function (Promise) {
     return {
         run: function (task, params) {
             var blob = null,
-                promise = new Promise(),
-                dispatcher = "var dispatch = function(func) { postMessage({ done: false, result: func.toString() }); };",
-                finalizer = "postMessage({ done: true, result: taskResult}); }",
-                func = "onmessage = function(e) { " + dispatcher + " var taskResult = (" + task.toString() + ").apply(null, e.data); " + finalizer;
+                promise = new Promise();
+
+            var dispatcher = function (func) {
+                    postMessage({ done: false, result: func.toString() });
+                },
+                finalizer = function (taskResult) {
+                    postMessage({ done: true, result: taskResult});
+                },
+                func = "onmessage = function(e) { var dispatch = " + dispatcher.toString() + "; var taskResult = (" + task.toString() + ").apply(null, e.data); var finalizer = (" + finalizer.toString() + ")(taskResult); }";
 
             if (typeof(Blob) === typeof(Function)) {
                 blob = new Blob([func], {

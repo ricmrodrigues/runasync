@@ -1,5 +1,5 @@
 /*
- * RunAsync v0.3.1 - 2013-01-26
+ * RunAsync v0.3.1 - 2013-01-27
  * 
  * Library that allows you to execute JavaScript asynchronously
  * seamlessly using modern browser capabilities
@@ -75,10 +75,15 @@ var Task = (function (Promise) {
     return {
         run: function (task, params) {
             var blob = null,
-                promise = new Promise(),
-                dispatcher = "var dispatch = function(func) { postMessage({ done: false, result: func.toString() }); };",
-                finalizer = "postMessage({ done: true, result: taskResult}); }",
-                func = "onmessage = function(e) { " + dispatcher + " var taskResult = (" + task.toString() + ").apply(null, e.data); " + finalizer;
+                promise = new Promise();
+
+            var dispatcher = function (func) {
+                    window.postMessage({ done: false, result: func.toString() });
+                },
+                finalizer = function (taskResult) {
+                    window.postMessage({ done: true, result: taskResult});
+                },
+                func = "onmessage = function(e) { var dispatcher = " + dispatcher.toString() + "; var taskResult = (" + task.toString() + ").apply(null, e.data); var finalizer = (" + finalizer + ")(taskResult);";
 
             if (typeof(Blob) === typeof(Function)) {
                 blob = new Blob([func], {
