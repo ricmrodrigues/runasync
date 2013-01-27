@@ -2,7 +2,7 @@
   "name": "runasync",
   "title": "RunAsync",
   "description": "Library that allows you to execute JavaScript asynchronously\n * seamlessly using modern browser capabilities\n",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "homepage": "https://github.com/ricmrodrigues/runasync",
   "author": {
     "name": "@ricmrodrigues",

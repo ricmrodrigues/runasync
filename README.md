@@ -1,4 +1,4 @@
-RunAsync v0.3.1 [![Build Status](https://travis-ci.org/ricmrodrigues/runasync.png?branch=master)](https://travis-ci.org/ricmrodrigues/runasync)  
+RunAsync v0.3.3 [![Build Status](https://travis-ci.org/ricmrodrigues/runasync.png?branch=master)](https://travis-ci.org/ricmrodrigues/runasync)  
 ===============
 Library that allows you to execute JavaScript asynchronously seamlessly using modern browser capabitilies
 with a syntax resembling .NET's Task Parallel Library.
