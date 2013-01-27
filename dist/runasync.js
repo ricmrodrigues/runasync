@@ -69,7 +69,7 @@ var Task = (function (Promise) {
         url = window.URL || window.webkitURL;
 
     if (!BlobBuilder && !Blob) {
-        throw "this browser does not support Task.Run";
+        throw "this browser does not support RunAsync";
     }
 
     return {
@@ -77,13 +77,13 @@ var Task = (function (Promise) {
             var blob = null,
                 promise = new Promise();
 
-            var dispatcher = function (func) {
-                    window.postMessage({ done: false, result: func.toString() });
+            var dispatcher = function (func, params) {
+                    postMessage({ done: false, result: func.toString(), params: params });
                 },
                 finalizer = function (taskResult) {
-                    window.postMessage({ done: true, result: taskResult});
+                    postMessage({ done: true, result: taskResult});
                 },
-                func = "onmessage = function(e) { var dispatcher = " + dispatcher.toString() + "; var taskResult = (" + task.toString() + ").apply(null, e.data); var finalizer = (" + finalizer + ")(taskResult);";
+                func = "onmessage = function(e) { var dispatch = " + dispatcher.toString() + "; var taskResult = (" + task.toString() + ").apply(null, e.data); var finalizer = (" + finalizer.toString() + ")(taskResult); }";
 
             if (typeof(Blob) === typeof(Function)) {
                 blob = new Blob([func], {
@@ -103,7 +103,7 @@ var Task = (function (Promise) {
                     promise._resolve(e.data.result);
                 } else {
                     //worker dispatched something to the UI thread
-                    eval("(" + e.data.result + ")()");
+                    eval("(" + e.data.result + ").apply(null, " + JSON.stringify(e.data.params) + ");");
                 }
             };
             worker.postMessage(params); // Start the worker.    

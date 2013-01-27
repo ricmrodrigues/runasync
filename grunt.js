@@ -49,7 +49,8 @@ module.exports = function (grunt) {
             },
             globals: {
                 Promise: true,
-				Task: true
+				Task: true,
+				postMessage: true
             }
         },
         uglify: {}

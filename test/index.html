@@ -21,9 +21,9 @@
 								//dispath something to UI thread
 								var millisecondsToWait = 500;
 								setTimeout(function() {
-									dispatch(function() {
-										$("body").append("<button>yay....</button>");
-									});
+									dispatch(function(ms, pato) {
+										$("body").append("<button>" + ms + ".... and " + pato + "</button>");
+									}, [millisecondsToWait,"mega pato..."]);
 								}, millisecondsToWait);                
 								
 								var response = 0,

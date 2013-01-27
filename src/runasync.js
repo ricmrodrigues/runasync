@@ -16,7 +16,7 @@ var Task = (function (Promise) {
         url = window.URL || window.webkitURL;
 
     if (!BlobBuilder && !Blob) {
-        throw "this browser does not support Task.Run";
+        throw "this browser does not support RunAsync";
     }
 
     return {
@@ -24,8 +24,8 @@ var Task = (function (Promise) {
             var blob = null,
                 promise = new Promise();
 
-            var dispatcher = function (func) {
-                    postMessage({ done: false, result: func.toString() });
+            var dispatcher = function (func, params) {
+                    postMessage({ done: false, result: func.toString(), params: params });
                 },
                 finalizer = function (taskResult) {
                     postMessage({ done: true, result: taskResult});
@@ -50,7 +50,7 @@ var Task = (function (Promise) {
                     promise._resolve(e.data.result);
                 } else {
                     //worker dispatched something to the UI thread
-                    eval("(" + e.data.result + ")()");
+                    eval("(" + e.data.result + ").apply(null, " + JSON.stringify(e.data.params) + ");");
                 }
             };
             worker.postMessage(params); // Start the worker.    
