@@ -1,6 +1,6 @@
 QUnit.config.autostart = false;
-QUnit.test("assert returned function is a promise", function() {
-	expect(2);
+test("assert that Task.run returns a valid promise instance", function() {
+	expect(3);
 	
     var promise = Task.run(function() {                
             var idx = 0,
@@ -14,9 +14,19 @@ QUnit.test("assert returned function is a promise", function() {
             return response;
         });	
 	
-	 console.log(typeof(promise));
-	
-     QUnit.ok( typeof(promise) === typeof(Object.prototype) , "Passed!" );
-	 QUnit.ok( typeof(promise.continueWith) === typeof(Function) , "Passed!" );
+	 ok(typeof (promise) === typeof (Object.prototype), "Passed!");
+     ok(typeof (promise.when) === typeof (Function), "Passed!");
+     ok(typeof (promise.continueWith) === typeof (Function), "Passed!");
+});
+asyncTest("assert within Task.run we can dispatch something to the UI thread", function () {
+    expect(1);
+
+    var promise = Task.run(function () {
+        dispatch(function () {
+            ok(document !== null && document !== undefined, "document must be available if we're in the UI thread");
+
+            start();
+        });
+    });
 });
 QUnit.start();
