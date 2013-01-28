@@ -1,5 +1,5 @@
 /*
- * RunAsync v0.3.0
+ * RunAsync v0.3.3
  * http://github.com/ricmrodrigues/runasync
  *
  * Library that allows you to execute JavaScript asynchronously
