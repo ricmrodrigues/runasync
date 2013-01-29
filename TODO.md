@@ -4,4 +4,4 @@ DONE
 TODO
 * terminate the worker after executing a task
 * implement cancellation capabilities
-* * create a CancelablePromise that will be a prototype of Promise and add the cancel function, this is what needs to be returned from a Task.run
+  * create a CancelablePromise that will be a prototype of Promise and add the cancel function, this is what needs to be returned from a Task.run
