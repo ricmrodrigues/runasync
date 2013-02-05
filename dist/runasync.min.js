@@ -1,5 +1,5 @@
 /*
- * RunAsync v0.3.3 - 2013-01-27
+ * RunAsync v0.3.3 - 2013-02-05
  * 
  * Library that allows you to execute JavaScript asynchronously
  * seamlessly using modern browser capabilities
