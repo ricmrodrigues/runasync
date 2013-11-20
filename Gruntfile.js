@@ -26,7 +26,7 @@ module.exports = function (grunt) {
             timeout: 20000
         },		
         lint: {
-            files: ['grunt.js', 'src/**/*.js']
+            files: ['Gruntfile.js', 'src/**/*.js']
         },
         watch: {
             files: '<config:lint.files>',
@@ -45,20 +45,20 @@ module.exports = function (grunt) {
                 boss: true,
                 eqnull: true,
                 browser: true,
-				evil: true
+		evil: true
             },
             globals: {
                 Promise: true,
-				Task: true,
-				postMessage: true
+		Task: true,
+		postMessage: true
             }
         },
         uglify: {}
     });
 
     // Default task.
-    grunt.registerTask('default', 'lint qunit concat min');
+    grunt.registerTask('default', ['lint','qunit','concat','min']);
 
     // Travis CI task.
-    grunt.registerTask('travis', 'lint qunit');
+    grunt.registerTask('travis', ['lint','qunit']);
 };
