@@ -25,12 +25,12 @@ module.exports = function (grunt) {
         phantomjs: {
             timeout: 20000
         },		
-        lint: {
-            files: ['Gruntfile.js', 'src/**/*.js']
+        uglify: {
+            files: ['src/**/*.js']
         },
         watch: {
-            files: '<config:lint.files>',
-            tasks: 'lint qunit'
+            files: '<config:uglify.files>',
+            tasks: 'uglify qunit'
         },
         jshint: {
             options: {
@@ -52,19 +52,18 @@ module.exports = function (grunt) {
 		Task: true,
 		postMessage: true
             }
-        },
-        uglify: {}
+        }
     });
 
     //load plugins
-    grunt.loadNpmTasks('lint');
-    grunt.loadNpmTasks('qunit');
-    grunt.loadNpmTasks('concat');
-    grunt.loadNpmTasks('min');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-qunit');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     // Default task.
-    grunt.registerTask('default', ['lint','qunit','concat','min']);
+    grunt.registerTask('default', ['jshint','qunit','concat','uglify']);
 
     // Travis CI task.
-    grunt.registerTask('travis', ['lint','qunit']);
+    grunt.registerTask('travis', ['jshint','qunit']);
 };
