@@ -56,6 +56,12 @@ module.exports = function (grunt) {
         uglify: {}
     });
 
+    //load plugins
+    grunt.loadNpmTasks('lint');
+    grunt.loadNpmTasks('qunit');
+    grunt.loadNpmTasks('concat');
+    grunt.loadNpmTasks('min');
+
     // Default task.
     grunt.registerTask('default', ['lint','qunit','concat','min']);
 
