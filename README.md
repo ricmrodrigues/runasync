@@ -27,7 +27,7 @@ continueWith(function([parameters]) { }) returns Promise
 Performance:
 ============
 __Using RunAsync__:
-http://jsfiddle.net/v7m5p/12/
+http://jsfiddle.net/v7m5p/13/
 
 __Running code synchronously__:
 http://jsfiddle.net/UejYX/3/
